@@ -20,7 +20,7 @@ class PickedImageGridItem extends StatelessWidget {
           image: FileImage(File(pickedImage.path)),
           fit: BoxFit.cover,
         ),
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: pickedImage.status != PickedImageStatus.INITIAL
           ? Builder(

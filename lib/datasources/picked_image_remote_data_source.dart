@@ -7,7 +7,9 @@ import 'package:flutter_image_upload/core/exceptions.dart';
 import 'package:flutter_image_upload/entities/picked_image_entity.dart';
 import 'package:flutter_image_upload/entities/picked_image_status.dart';
 import 'package:flutter_image_upload/models/picked_image.dart';
+import 'package:injectable/injectable.dart';
 
+@lazySingleton
 class PickedImageRemoteDataSource {
   final FirebaseStorage _storage = FirebaseStorage(
       storageBucket: 'gs://flutter-image-upload-dc0bc.appspot.com');

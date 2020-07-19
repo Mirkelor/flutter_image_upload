@@ -3,7 +3,9 @@ import 'package:flutter_image_upload/core/constants.dart';
 import 'package:flutter_image_upload/entities/image_entity.dart';
 import 'package:flutter_image_upload/models/image.dart';
 import 'package:flutter_image_upload/repositories/image_repository.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton(as: ImageRepository)
 class FirebaseImageRepository implements ImageRepository {
   final imageCollection = Firestore.instance
       .collection(PARENT_COLLECTION)

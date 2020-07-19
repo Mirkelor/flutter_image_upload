@@ -7,8 +7,10 @@ import 'package:flutter_image_upload/core/failures.dart';
 import 'package:flutter_image_upload/datasources/picked_image_local_data_source.dart';
 import 'package:flutter_image_upload/datasources/picked_image_remote_data_source.dart';
 import 'package:flutter_image_upload/models/picked_image.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
+@lazySingleton
 class PickedImageRepository {
   final PickedImageLocalDataSource localDataSource;
   final PickedImageRemoteDataSource remoteDataSource;

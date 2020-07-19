@@ -1,15 +1,15 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_upload/entities/picked_image_status.dart';
+import 'package:flutter_image_upload/injection.dart';
 import 'package:flutter_image_upload/models/picked_image.dart';
 import 'package:flutter_image_upload/presentation/bloc/picked_image_bloc.dart';
-import 'package:flutter_image_upload/presentation/pages/image_show_page.dart';
 import 'package:flutter_image_upload/presentation/widgets/picked_image_grid_item.dart';
+import 'package:flutter_image_upload/routes/router.gr.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class ImageUploadPage extends StatelessWidget {
-  static const routeName = '/image-upload';
-
   @override
   Widget build(BuildContext context) {
     List<PickedImage> _pickedImageList;
@@ -23,16 +23,11 @@ class ImageUploadPage extends StatelessWidget {
 
   Scaffold buildScaffold(BuildContext context,
       List<PickedImage> _pickedImageList, bool _isAllSuccess) {
-    final _bloc = BlocProvider.of<PickedImageBloc>(context);
+    final _bloc = getIt<PickedImageBloc>();
     return Scaffold(
       appBar: AppBar(
         title: Text('Image Upload Page'),
         centerTitle: true,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context)
-              .pushReplacementNamed(ImageShowPage.routeName),
-        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -76,8 +71,14 @@ class ImageUploadPage extends StatelessWidget {
                           Fluttertoast.showToast(
                               msg: '✔ Upload Successful',
                               backgroundColor: Colors.green);
+                          Future.delayed(Duration(seconds: 3)).then((value) =>
+                              ExtendedNavigator.root
+                                  .push(Routes.imageShowPage));
                         }
                         return buildImageGrid(_pickedImageList);
+                      } else if (state is PickedImageError) {
+                        Fluttertoast.showToast(
+                            msg: 'It failed', backgroundColor: Colors.red);
                       }
                       return Container();
                     },
@@ -95,8 +96,7 @@ class ImageUploadPage extends StatelessWidget {
           if (_pickedImageList != null) {
             if (_isAllSuccess) {
               _isAllSuccess = false;
-              Navigator.of(context)
-                  .pushReplacementNamed(ImageShowPage.routeName);
+              ExtendedNavigator.root.push(Routes.imageShowPage);
             } else {
               _bloc..add(UploadPickedImage(_pickedImageList));
             }

@@ -1,16 +1,16 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_upload/presentation/bloc/image_bloc.dart';
+import 'package:flutter_image_upload/presentation/widgets/image_grid_item.dart';
+import 'package:flutter_image_upload/routes/router.gr.dart';
 
-import 'image_upload_page.dart';
+import '../../injection.dart';
 
 class ImageShowPage extends StatelessWidget {
-  static const routeName = '/';
-
   @override
   Widget build(BuildContext context) {
-    final ImageBloc _imageBloc = BlocProvider.of<ImageBloc>(context);
+    final _imageBloc = getIt<ImageBloc>();
 
     return BlocBuilder<ImageBloc, ImageState>(
       builder: (context, state) {
@@ -35,19 +35,10 @@ class ImageShowPage extends StatelessWidget {
                               mainAxisSpacing: 6,
                               crossAxisSpacing: 6,
                             ),
-                            itemBuilder: (context, index) => CachedNetworkImage(
-                              imageUrl: snapshot.data.imageList
-                                  ?.elementAt(index)
-                                  ?.url,
-                              placeholder: (_, __) => Center(
-                                child: SizedBox(
-                                  width: 32,
-                                  height: 32,
-                                  child: CircularProgressIndicator(),
-                                ),
-                              ),
-                              fit: BoxFit.cover,
-                            ),
+                            itemBuilder: (context, index) => ImageGridItem(
+                                imageUrl: snapshot.data.imageList
+                                    ?.elementAt(index)
+                                    ?.url),
                           )
                         : Center(
                             child: Text(
@@ -60,8 +51,7 @@ class ImageShowPage extends StatelessWidget {
           floatingActionButton: FloatingActionButton.extended(
             label: Text('Image Upload'),
             icon: Icon(Icons.file_upload),
-            onPressed: () => Navigator.of(context)
-                .pushReplacementNamed(ImageUploadPage.routeName),
+            onPressed: () => ExtendedNavigator.root.pushImageUploadPage(),
           ),
         );
       },

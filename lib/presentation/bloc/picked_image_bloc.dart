@@ -6,11 +6,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_image_upload/core/constants.dart';
 import 'package:flutter_image_upload/models/picked_image.dart';
 import 'package:flutter_image_upload/repositories/picked_image_repository.dart';
+import 'package:injectable/injectable.dart';
 
 part 'picked_image_event.dart';
-
 part 'picked_image_state.dart';
 
+@injectable
 class PickedImageBloc extends Bloc<PickedImageEvent, PickedImageState> {
   final PickedImageRepository _repository;
   StreamSubscription _imageSubscription;

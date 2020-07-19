@@ -1,33 +1,28 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_image_upload/datasources/picked_image_local_data_source.dart';
-import 'package:flutter_image_upload/datasources/picked_image_remote_data_source.dart';
+import 'package:flutter_image_upload/injection.dart';
 import 'package:flutter_image_upload/presentation/bloc/image_bloc.dart';
 import 'package:flutter_image_upload/presentation/bloc/picked_image_bloc.dart';
-import 'package:flutter_image_upload/presentation/pages/image_show_page.dart';
-import 'package:flutter_image_upload/presentation/pages/image_upload_page.dart';
-import 'package:flutter_image_upload/repositories/firebase_image_repository.dart';
-import 'package:flutter_image_upload/repositories/picked_image_repository.dart';
+import 'package:flutter_image_upload/routes/router.gr.dart';
 
 void main() {
+  configureInjection();
   runApp(ImageApp());
 }
 
 class ImageApp extends StatelessWidget {
+  final _exNavigatorKey = GlobalKey<ExtendedNavigatorState>();
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<ImageBloc>(
-          create: (context) =>
-              ImageBloc(imageRepository: FirebaseImageRepository()),
+          create: (context) => getIt<ImageBloc>(),
         ),
         BlocProvider<PickedImageBloc>(
-          create: (context) => PickedImageBloc(
-              repository: PickedImageRepository(
-            localDataSource: PickedImageLocalDataSource(),
-            remoteDataSource: PickedImageRemoteDataSource(),
-          )),
+          create: (context) => getIt<PickedImageBloc>(),
         )
       ],
       child: MaterialApp(
@@ -37,15 +32,12 @@ class ImageApp extends StatelessWidget {
           primaryColor: Colors.red.shade800,
           accentColor: Colors.red.shade500,
         ),
-        initialRoute: '/',
-        routes: {
-          ImageShowPage.routeName: (ctx) => ImageShowPage(),
-          ImageUploadPage.routeName: (ctx) => ImageUploadPage(),
-        },
+        builder: ExtendedNavigator(
+          initialRoute: Routes.imageShowPage,
+          key: _exNavigatorKey,
+          router: Router(),
+        ),
       ),
     );
   }
 }
-
-//return ChangeNotifierProvider<ImagePathProvider>(
-//create: (_) => ImagePathProvider(),

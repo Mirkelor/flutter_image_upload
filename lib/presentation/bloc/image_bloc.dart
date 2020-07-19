@@ -5,12 +5,13 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_image_upload/models/image.dart';
 import 'package:flutter_image_upload/repositories/firebase_image_repository.dart';
 import 'package:flutter_image_upload/repositories/image_repository.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 part 'image_event.dart';
-
 part 'image_state.dart';
 
+@injectable
 class ImageBloc extends Bloc<ImageEvent, ImageState> {
   final FirebaseImageRepository _imageRepository;
   StreamSubscription _imageSubscription;
@@ -33,11 +34,9 @@ class ImageBloc extends Bloc<ImageEvent, ImageState> {
 
   Stream<ImageState> _mapLoadImageToState() async* {
     _imageSubscription?.cancel();
-    _imageSubscription = _imageRepository
-        .imageList()
-        .listen((imageList) {
-          add(ImageListUpdated(imageList));
-        });
+    _imageSubscription = _imageRepository.imageList().listen((imageList) {
+      add(ImageListUpdated(imageList));
+    });
   }
 
   Stream<ImageState> _mapImageListUpdateToState(ImageListUpdated event) async* {
