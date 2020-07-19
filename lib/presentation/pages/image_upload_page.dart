@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_upload/entities/picked_image_status.dart';
@@ -7,6 +5,7 @@ import 'package:flutter_image_upload/models/picked_image.dart';
 import 'package:flutter_image_upload/presentation/bloc/picked_image_bloc.dart';
 import 'package:flutter_image_upload/presentation/pages/image_show_page.dart';
 import 'package:flutter_image_upload/presentation/widgets/picked_image_grid_item.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ImageUploadPage extends StatelessWidget {
   static const routeName = '/image-upload';
@@ -73,6 +72,11 @@ class ImageUploadPage extends StatelessWidget {
                                     e.status == PickedImageStatus.SUCCESS)
                                 .length ==
                             _pickedImageList.length;
+                        if (_isAllSuccess) {
+                          Fluttertoast.showToast(
+                              msg: '✔ Upload Successful',
+                              backgroundColor: Colors.green);
+                        }
                         return buildImageGrid(_pickedImageList);
                       }
                       return Container();
@@ -90,7 +94,7 @@ class ImageUploadPage extends StatelessWidget {
         onPressed: () {
           if (_pickedImageList != null) {
             if (_isAllSuccess) {
-              sleep(Duration(seconds: 1));
+              _isAllSuccess = false;
               Navigator.of(context)
                   .pushReplacementNamed(ImageShowPage.routeName);
             } else {

@@ -14,14 +14,13 @@ dependencies:
   flutter:
     sdk: flutter
   file_picker: ^1.12.0
-  provider: ^4.3.1
   cached_network_image: ^2.2.0+1
   firebase_storage: ^3.1.6
   cloud_firestore: ^0.13.7
   flutter_bloc: ^5.0.1
   equatable: ^1.2.2
   dartz: ^0.9.1
-  data_connection_checker: ^0.3.4
+  fluttertoast: ^7.0.1
 
 dev_dependencies:
   flutter_test:
