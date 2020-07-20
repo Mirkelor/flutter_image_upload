@@ -7,18 +7,18 @@ It allows you to select multiple images.
 
 When you open this application you can view your images which already uploaded to database.
 
-<h3>Install Dependencies
+<h3>Install Dependencies</h3>
   
   ```flutter pub get```
 
-<h3>Run
+<h3>Run</h3>
   
   If you have flutter installed in your computer. Open project then start simulator android or ios. 
   Then click to run.
   
 
-<h3>Flutter install
-  <h4>MacOS
+<h3>Flutter install</h3>
+  <h4>MacOS</h4>
    
    clone flutter git repository to your ~/ folder
   ```
@@ -39,15 +39,15 @@ Write below to terminal to check your flutter version
 
  ```flutter doctor -v```
  
- <h3>iOS setup
+ <h3>iOS setup</h3>
   
-<h4>Install Xcode
+<h4>Install Xcode</h4>
   
 To develop Flutter apps for iOS, you need a Mac with Xcode installed.
 
 Install the latest stable version of Xcode (using <a href=https://developer.apple.com/xcode>web download</a> or <a href=https://itunes.apple.com/us/app/xcode/id497799835>the Mac App Store</a>).
 
-<h3>Set up the iOS simulator
+<h3>Set up the iOS simulator</h3>
   
 To prepare to run and test your Flutter app on the iOS simulator, follow these steps:
 
@@ -58,7 +58,7 @@ On your Mac, find the Simulator via Spotlight or by using the following command:
 Make sure your simulator is using a 64-bit device (iPhone 5s or later) by checking the settings in the simulator’s Hardware > Device menu.
 Depending on your development machine’s screen size, simulated high-screen-density iOS devices might overflow your screen. Set the device scale under the Window > Scale menu in the simulator.
 
-<h3>Set up your Android device
+<h3>Set up your Android device</h3>
 
 To prepare to run and test your Flutter app on an Android device, you need an Android device running Android 4.1 (API level 16) or higher.
 
@@ -67,7 +67,7 @@ Windows-only: Install the Google USB Driver.
 Using a USB cable, plug your phone into your computer. If prompted on your device, authorize your computer to access your device.
 In the terminal, run the flutter devices command to verify that Flutter recognizes your connected Android device. By default, Flutter uses the version of the Android SDK where your adb tool is based. If you want Flutter to use a different installation of the Android SDK, you must set the ANDROID_SDK_ROOT environment variable to that installation directory.
 
-<h3>Set up the Android emulator
+<h3>Set up the Android emulator</h3>
 
 To prepare to run and test your Flutter app on the Android emulator, follow these steps:
 
