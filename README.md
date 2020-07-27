@@ -5,6 +5,10 @@ and upload to a remote database.
 
 It allows you to select multiple images. 
 
+![](https://media.giphy.com/media/dt6CH4X3MxCaifeDhB/giphy.gif)
+
+![](https://media.giphy.com/media/JoySpWUXgfZDfx6JOe/giphy.gif)
+
 When you open this application you can view your images which already uploaded to database.
 
 <h3>Install Dependencies</h3>
